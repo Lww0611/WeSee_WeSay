@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Data.cpp \
     FileSystem.cpp \
+    ProjectPeopleOfAllAges.cpp \
     main.cpp \
     Widget.cpp
 
@@ -25,9 +26,12 @@ HEADERS += \
     Data.h \
     Data.h \
     FileSystem.h \
+    ProjectPeopleOfAllAges.h \
+    ProjectPeopleOfAllAgesCommon.h \
     Widget.h
 
 FORMS += \
+    ProjectPeopleOfAllAges.ui \
     widget.ui
 
 TRANSLATIONS += \
