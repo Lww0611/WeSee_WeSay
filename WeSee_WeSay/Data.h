@@ -1,26 +1,33 @@
 #ifndef DATA_H
 #define DATA_H
 #include <QString>
-#include <QDate>
-#include <QDebug>
-
+#include "Altname.h"
+#include "Address.h"
+#include "Entry.h"
+#include "Text.h"
 
 
 class Data
 {
 public:
     Data();
-    Data(int id, QString name, QDate birthday, QString describe);
 
     //数据域
-    int id;
+    int personid;
     QString name;
-    QDate birthday;
-    QString describe;
+    int birthday;
+    int deathday;
+    int age;
+    bool gender;
 
-
-    QString ToString() const;
-    static Data FromString(const QString& str);
+    int altnamenum;
+    Altnameptr altnamelist;
+    int addressnum;
+    Addressptr addresslist;
+    int entrynum;
+    Entryptr entrylist;
+    int textnum;
+    Textptr textlist;
 
 };
 
