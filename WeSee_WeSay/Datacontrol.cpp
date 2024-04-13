@@ -151,17 +151,121 @@ QList<OfficialList> *DataControl::getOfficialList(QString name)
 
 QList<ListOfOfficals> *DataControl::getListOfOfficals(QString name)
 {
+    QList<ListOfOfficals>* listOfOfficals = new QList<ListOfOfficals>;
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    int personid = query.value(0).toInt();
+    query.exec(QString("SELECT c_posting_id FROM POSTING_DATA WHERE c_personid = %1").arg(personid));
+    int i = 1;
+    while(query.next())
+    {
+        ListOfOfficals* Officals = new ListOfOfficals;
+        Officals->Number = i++;
+        queryindex.exec(QString("SELECT c_office_id, c_firstyear, c_fy_nh_code, c_lastyear, c_ly_nh_code, c_appt_type_code, c_source, c_notes FROM POSTED_TO_OFFICE_DATA WHERE c_posting_id = %1").arg(query.value(0).toString()));
+        queryindex.next();
+        QString c_office_id = queryindex.value(0).toString();
+        QString c_firstyear = queryindex.value(1).toString();
+        QString c_fy_nh_code = queryindex.value(2).toString();
+        QString c_lastyear = queryindex.value(3).toString();
+        QString c_ly_nh_code = queryindex.value(4).toString();
+        QString c_appt_type_code = queryindex.value(5).toString();
+        QString c_source = queryindex.value(6).toString();
+        QString c_notes = queryindex.value(7).toString();
 
+        Officals->Comment = c_notes;
+
+        queryindex.exec(QString("SELECT c_appt_type_desc_chn FROM APPOINTMENT_TYPE_CODES WHERE c_appt_type_code = %1").arg(c_appt_type_code));
+        queryindex.next();
+        Officals->DisgrantClass = queryindex.value(0).toString();
+
+        queryindex.exec(QString("SELECT c_office_chn FROM OFFICE_CODES WHERE c_office_id = %1").arg(c_office_id));
+        queryindex.next();
+        Officals->OfficialName = queryindex.value(0).toString();
+
+        queryindex.exec(QString("SELECT c_addr_id FROM POSTED_TO_ADDR_DATA WHERE c_posting_id = %1").arg(query.value(0).toString()));
+        queryindex.next();
+        QString c_addr_id = queryindex.value(0).toString();
+        queryindex.exec(QString("SELECT c_name_chn FROM ADDR_CODES WHERE c_addr_id = %1").arg(c_addr_id));
+        queryindex.next();
+        Officals->OfficialAddress = queryindex.value(0).toString();
+
+        queryindex.exec(QString("SELECT c_nianhao_chn FROM NIAN_HAO WHERE c_nianhao_id = %1").arg(c_fy_nh_code));
+        queryindex.next();
+        Officals->OfficialTime += queryindex.value(0).toString() + "(" + c_firstyear + ") - ";
+        queryindex.exec(QString("SELECT c_nianhao_chn FROM NIAN_HAO WHERE c_nianhao_id = %1").arg(c_ly_nh_code));
+        queryindex.next();
+        Officals->OfficialTime += queryindex.value(0).toString() + "(" + c_lastyear + ")";
+
+        queryindex.exec(QString("SELECT c_title_chn FROM TEXT_CODES WHERE c_textid = %1").arg(c_source));
+        queryindex.next();
+        Officals->Address = queryindex.value(0).toString();
+
+        listOfOfficals->push_back(*Officals);
+    }
+    return listOfOfficals;
 }
 
 QList<DivisSocial> *DataControl::getDivisSocial(QString name)
 {
+    QList<DivisSocial>* divisSociallist = new QList<DivisSocial>;
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    int personid = query.value(0).toInt();
+    query.exec(QString("SELECT c_status_code, c_firstyear, c_fy_nh_code, c_lastyear, c_ly_nh_code, c_source, c_notes FROM STATUS_DATA WHERE c_personid = %1").arg(personid));
+    int i = 1;
+    while(query.next())
+    {
+        DivisSocial* divisSocial = new DivisSocial;
+        divisSocial->Number = i++;
+        divisSocial->Comment = query.value(6).toString();
+        queryindex.exec(QString("SELECT c_status_desc_chn FROM STATUS_CODES WHERE c_status_code = %1").arg(query.value(0).toString()));
+        queryindex.next();
+        divisSocial->SocialDivis = queryindex.value(0).toString();
 
+        queryindex.exec(QString("SELECT c_title_chn FROM TEXT_CODES WHERE c_textid = %1").arg(query.value(5).toString()));
+        queryindex.next();
+        divisSocial->Address = queryindex.value(0).toString();
+
+        queryindex.exec(QString("SELECT c_nianhao_chn FROM NIAN_HAO WHERE c_nianhao_id = %1").arg(query.value(2).toString()));
+        queryindex.next();
+        divisSocial->Time += queryindex.value(0).toString() + "(" + query.value(1).toString() + ") - ";
+        queryindex.exec(QString("SELECT c_nianhao_chn FROM NIAN_HAO WHERE c_nianhao_id = %1").arg(query.value(4).toString()));
+        queryindex.next();
+        divisSocial->Time += queryindex.value(0).toString() + "(" + query.value(3).toString() + ")";
+
+        divisSociallist->push_back(*divisSocial);
+    }
+    return divisSociallist;
 }
 
 QList<FamillyRelation> *DataControl::getFamillyRelation(QString name)
 {
+    QList<FamillyRelation>* famillyRelationlist = new QList<FamillyRelation>;
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    int personid = query.value(0).toInt();
+    query.exec(QString("SELECT c_kin_id, c_kin_code, c_source, c_notes FROM KIN_DATA WHERE c_personid = %1").arg(personid));
+    int i = 1;
+    while(query.next())
+    {
+        FamillyRelation* famillyRelation = new FamillyRelation;
+        famillyRelation->Number = i++;
+        famillyRelation->Comment = query.value(3).toString();
+        queryindex.exec(QString("SELECT c_name_chn FROM BIOG_MAIN WHERE c_personid = %1").arg(query.value(0).toString()));
+        queryindex.next();
+        famillyRelation->RelationPerson = queryindex.value(0).toString();
 
+        queryindex.exec(QString("SELECT c_kinrel_chn FROM KINSHIP_CODES WHERE c_kincode = %1").arg(query.value(1).toString()));
+        queryindex.next();
+        famillyRelation->Relation = queryindex.value(0).toString();
+
+        queryindex.exec(QString("SELECT c_title_chn FROM TEXT_CODES WHERE c_textid = %1").arg(query.value(2).toString()));
+        queryindex.next();
+        famillyRelation->Address = queryindex.value(0).toString();
+
+        famillyRelationlist->push_back(*famillyRelation);
+    }
+    return famillyRelationlist;
 }
 
 QList<SocialRelation> *DataControl::getSocialRelation(QString name)
