@@ -23,8 +23,8 @@ struct PeoPleBaseInfo
     QString Birth;//生年
     QString DeathDays;//<卒年
     QString DieAtTheAge;//<享年
-    QString NativePlace;//<籍贯
-    QString Krorimaki;//<郡望
+//    QString NativePlace;//<籍贯
+//    QString Krorimaki;//<郡望
 };
 
 //别名列表

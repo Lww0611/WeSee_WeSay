@@ -88,15 +88,24 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>935</width>
-            <height>3012</height>
+            <width>950</width>
+            <height>2982</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
             <widget class="QCheckBox" name="checkBox">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="tabletTracking">
+              <bool>false</bool>
+             </property>
              <property name="text">
               <string>别名列表</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -159,6 +168,9 @@
              <property name="text">
               <string>地址列表</string>
              </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
            <item>
@@ -210,6 +222,9 @@
              <property name="text">
               <string>入仕列表</string>
              </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
            <item>
@@ -260,6 +275,9 @@
             <widget class="QCheckBox" name="checkBox_4">
              <property name="text">
               <string>任官列表</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -322,6 +340,9 @@
              <property name="text">
               <string>社会区分</string>
              </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
            <item>
@@ -372,6 +393,9 @@
             <widget class="QCheckBox" name="checkBox_6">
              <property name="text">
               <string>亲属关系</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -424,6 +448,9 @@
              <property name="text">
               <string>社会关系</string>
              </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
            <item>
@@ -475,6 +502,9 @@
              <property name="text">
               <string>著述</string>
              </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
            <item>
@@ -525,6 +555,9 @@
             <widget class="QCheckBox" name="checkBox_9">
              <property name="text">
               <string>出处</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -579,9 +612,9 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>-1657</y>
-            <width>935</width>
-            <height>2015</height>
+            <y>0</y>
+            <width>950</width>
+            <height>1994</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_5">
@@ -591,6 +624,9 @@
               <widget class="QCheckBox" name="checkBox_10">
                <property name="text">
                 <string>亲属关系</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -618,6 +654,9 @@
                <property name="text">
                 <string>社会关系（笼统）</string>
                </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
              <item>
@@ -643,6 +682,9 @@
               <widget class="QCheckBox" name="checkBox_12">
                <property name="text">
                 <string>朋友关系类</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -670,6 +712,9 @@
                <property name="text">
                 <string>学术关系类</string>
                </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
              <item>
@@ -696,6 +741,9 @@
                <property name="text">
                 <string>政治关系类</string>
                </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
              <item>
@@ -721,6 +769,9 @@
               <widget class="QCheckBox" name="checkBox_15">
                <property name="text">
                 <string>著述关系类</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -1162,8 +1213,6 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="ProjectPeopleOfAllAges.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -193,13 +193,16 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 935, 3012));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 950, 2982));
         verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         checkBox = new QCheckBox(scrollAreaWidgetContents);
         checkBox->setObjectName(QString::fromUtf8("checkBox"));
+        checkBox->setEnabled(true);
+        checkBox->setTabletTracking(false);
+        checkBox->setChecked(true);
 
         verticalLayout->addWidget(checkBox);
 
@@ -229,6 +232,7 @@ public:
 
         checkBox_2 = new QCheckBox(scrollAreaWidgetContents);
         checkBox_2->setObjectName(QString::fromUtf8("checkBox_2"));
+        checkBox_2->setChecked(true);
 
         verticalLayout->addWidget(checkBox_2);
 
@@ -255,6 +259,7 @@ public:
 
         checkBox_3 = new QCheckBox(scrollAreaWidgetContents);
         checkBox_3->setObjectName(QString::fromUtf8("checkBox_3"));
+        checkBox_3->setChecked(true);
 
         verticalLayout->addWidget(checkBox_3);
 
@@ -281,6 +286,7 @@ public:
 
         checkBox_4 = new QCheckBox(scrollAreaWidgetContents);
         checkBox_4->setObjectName(QString::fromUtf8("checkBox_4"));
+        checkBox_4->setChecked(true);
 
         verticalLayout->addWidget(checkBox_4);
 
@@ -311,6 +317,7 @@ public:
 
         checkBox_5 = new QCheckBox(scrollAreaWidgetContents);
         checkBox_5->setObjectName(QString::fromUtf8("checkBox_5"));
+        checkBox_5->setChecked(true);
 
         verticalLayout->addWidget(checkBox_5);
 
@@ -337,6 +344,7 @@ public:
 
         checkBox_6 = new QCheckBox(scrollAreaWidgetContents);
         checkBox_6->setObjectName(QString::fromUtf8("checkBox_6"));
+        checkBox_6->setChecked(true);
 
         verticalLayout->addWidget(checkBox_6);
 
@@ -363,6 +371,7 @@ public:
 
         checkBox_7 = new QCheckBox(scrollAreaWidgetContents);
         checkBox_7->setObjectName(QString::fromUtf8("checkBox_7"));
+        checkBox_7->setChecked(true);
 
         verticalLayout->addWidget(checkBox_7);
 
@@ -389,6 +398,7 @@ public:
 
         checkBox_8 = new QCheckBox(scrollAreaWidgetContents);
         checkBox_8->setObjectName(QString::fromUtf8("checkBox_8"));
+        checkBox_8->setChecked(true);
 
         verticalLayout->addWidget(checkBox_8);
 
@@ -415,6 +425,7 @@ public:
 
         checkBox_9 = new QCheckBox(scrollAreaWidgetContents);
         checkBox_9->setObjectName(QString::fromUtf8("checkBox_9"));
+        checkBox_9->setChecked(true);
 
         verticalLayout->addWidget(checkBox_9);
 
@@ -451,7 +462,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, -1657, 935, 2015));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 950, 1994));
         gridLayout_5 = new QGridLayout(scrollAreaWidgetContents_2);
         gridLayout_5->setSpacing(6);
         gridLayout_5->setContentsMargins(11, 11, 11, 11);
@@ -461,6 +472,7 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         checkBox_10 = new QCheckBox(scrollAreaWidgetContents_2);
         checkBox_10->setObjectName(QString::fromUtf8("checkBox_10"));
+        checkBox_10->setChecked(true);
 
         verticalLayout_2->addWidget(checkBox_10);
 
@@ -482,6 +494,7 @@ public:
 
         checkBox_11 = new QCheckBox(scrollAreaWidgetContents_2);
         checkBox_11->setObjectName(QString::fromUtf8("checkBox_11"));
+        checkBox_11->setChecked(true);
 
         verticalLayout_2->addWidget(checkBox_11);
 
@@ -503,6 +516,7 @@ public:
 
         checkBox_12 = new QCheckBox(scrollAreaWidgetContents_2);
         checkBox_12->setObjectName(QString::fromUtf8("checkBox_12"));
+        checkBox_12->setChecked(true);
 
         verticalLayout_2->addWidget(checkBox_12);
 
@@ -524,6 +538,7 @@ public:
 
         checkBox_13 = new QCheckBox(scrollAreaWidgetContents_2);
         checkBox_13->setObjectName(QString::fromUtf8("checkBox_13"));
+        checkBox_13->setChecked(true);
 
         verticalLayout_2->addWidget(checkBox_13);
 
@@ -545,6 +560,7 @@ public:
 
         checkBox_14 = new QCheckBox(scrollAreaWidgetContents_2);
         checkBox_14->setObjectName(QString::fromUtf8("checkBox_14"));
+        checkBox_14->setChecked(true);
 
         verticalLayout_2->addWidget(checkBox_14);
 
@@ -566,6 +582,7 @@ public:
 
         checkBox_15 = new QCheckBox(scrollAreaWidgetContents_2);
         checkBox_15->setObjectName(QString::fromUtf8("checkBox_15"));
+        checkBox_15->setChecked(true);
 
         verticalLayout_2->addWidget(checkBox_15);
 

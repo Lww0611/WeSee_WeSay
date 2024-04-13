@@ -15,9 +15,9 @@ ProjectPeopleOfAllAges::ProjectPeopleOfAllAges(QWidget *parent)
     info.Alias = QStringLiteral("李拾遗，李翰林，李谪仙，李青莲 太白 酒仙翁，青莲居士 李十二");
     info.Birth = QStringLiteral("周 长安 元年(701)");
     info.DeathDays = QStringLiteral("唐 宝应 元年(762)");
-    info.NativePlace = QStringLiteral("任城");
+//    info.NativePlace = QStringLiteral("任城");
     info.DieAtTheAge= QStringLiteral("701");
-    info.Krorimaki = QStringLiteral("陇西");
+//    info.Krorimaki = QStringLiteral("陇西");
     setBaseInfo(info);
 
     LIST_Alias infoList;
@@ -131,7 +131,7 @@ void ProjectPeopleOfAllAges::SignalStateChanged(int index)
 }
 void ProjectPeopleOfAllAges::setTableWidgetVisbal(QTableWidget* table,int index)
 {
-    if (index == 2)
+    if (index == 0)
     {
         table->setVisible(false);
     }
@@ -142,7 +142,7 @@ void ProjectPeopleOfAllAges::setTableWidgetVisbal(QTableWidget* table,int index)
 }
 void ProjectPeopleOfAllAges::setTableWidgetVisbal(QWidget* table, int index)
 {
-    if (index == 2)
+    if (index == 0)
     {
         table->setVisible(false);
     }
@@ -161,9 +161,9 @@ void  ProjectPeopleOfAllAges::setBaseInfo(const PeoPleBaseInfo& info)
     ui.label_11->setText(info.Sex);
     ui.label_18->setText(info.DieAtTheAge);
     ui.label_12->setText(info.Time);
-    ui.label_20->setText(info.NativePlace);
+//    ui.label_20->setText(info.NativePlace);
     ui.label_15->setText(info.Alias);
-    ui.label_21->setText(info.Krorimaki);
+//    ui.label_21->setText(info.Krorimaki);
 
     ui.label->setToolTip(info.Name);
     ui.label_4->setToolTip(info.PersonID);
@@ -173,9 +173,9 @@ void  ProjectPeopleOfAllAges::setBaseInfo(const PeoPleBaseInfo& info)
     ui.label_11->setToolTip(info.Sex);
     ui.label_18->setToolTip(info.DieAtTheAge);
     ui.label_12->setToolTip(info.Time);
-    ui.label_20->setToolTip(info.NativePlace);
+//    ui.label_20->setToolTip(info.NativePlace);
     ui.label_15->setToolTip(info.Alias);
-    ui.label_21->setToolTip(info.Krorimaki);
+//    ui.label_21->setToolTip(info.Krorimaki);
 }
 void ProjectPeopleOfAllAges::setAliasList(const LIST_Alias& info)
 {
