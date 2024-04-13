@@ -14,23 +14,37 @@ public:
     ~ProjectPeopleOfAllAges();
 public:
 
-    //表格形式的相关接口
+    // 基本信息接口
     void setBaseInfo(const PeoPleBaseInfo& info);
+
+    // 表格形式-别名接口
     void setAliasList(const LIST_Alias& info);
+    // 表格形式-地址接口
     void setAddressList(const LIST_AddressList& info);
+    // 表格形式-入仕接口
     void setOfficialList(const LIST_OfficialList& info);
+    // 表格形式-任官接口
     void setListOfOfficals(const LIST_ListOfOfficals& info);
+    // 表格形式-社会区分接口
     void setDivisSocial(const LIST_DivisSocial& info);
+    // 表格形式-亲属关系接口
     void setFamillyRelation(const LIST_FamillyRelation& info);
+    // 表格形式-社会关系接口
     void setSocialRelation(const LIST_SocialRelation& info);
+    // 表格形式-著述接口
     void setZhuShu(const LIST_ZhuShu& info);
+    // 表格形式-出处接口
     void setProvenance(const LIST_Provenance& info);
 
-    //关系图形式相关接口
+    // 关系图形式-亲属关系接口
     void setKindship(QStringList& info);
+    // 关系图形式-社会关系（笼统）接口
     void setSocialRelation(QStringList& info);
-    void setAcademicRelation(QStringList& info);
+    // 关系图形式-朋友关系类接口
     void setFriendRelation(QStringList& info);
+    // 关系图形式-学术关系类接口
+    void setAcademicRelation(QStringList& info);
+    // 关系图形是-著述关系类接口
     void setBibliographicRelation(QStringList& info);
 
 private slots:

@@ -22,9 +22,9 @@ ProjectPeopleOfAllAges::ProjectPeopleOfAllAges(QWidget *parent)
 
     LIST_Alias infoList;
     AliasList alias, alias1, alias2;
-    alias.Nmae = "1";
-    alias1.Nmae = "22";
-    alias2.Nmae = "333";
+    alias.Name = "1";
+    alias1.Name = "22";
+    alias2.Name = "333";
     infoList.push_back(alias);
     infoList.push_back(alias1);
     infoList.push_back(alias2);
@@ -194,7 +194,7 @@ void ProjectPeopleOfAllAges::setAliasList(const LIST_Alias& info)
         ui.tableWidget->setItem(row, 1, item1);
 
         QTableWidgetItem*item2 = new QTableWidgetItem();
-        item2->setText(a.Nmae);
+        item2->setText(a.Name);
         ui.tableWidget->setItem(row, 2, item2);
 
         QTableWidgetItem*item3 = new QTableWidgetItem();

@@ -32,7 +32,7 @@ struct AliasList
 {
     QString Number;//< 序号
     QString Type;//<类型
-    QString Nmae;//<名字
+    QString Name;//<名字
     QString Comment;//< 备注
 };
 
