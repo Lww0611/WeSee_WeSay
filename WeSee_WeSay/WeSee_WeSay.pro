@@ -16,23 +16,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Address.cpp \
-    Altname.cpp \
     Data.cpp \
     Datacontrol.cpp \
-    Entry.cpp \
     FileSystem.cpp \
     ProjectPeopleOfAllAges.cpp \
     main.cpp \
     Widget.cpp
 
 HEADERS += \
-    Address.h \
-    Altname.h \
-    Data.h \
     Data.h \
     Datacontrol.h \
-    Entry.h \
     FileSystem.h \
     ProjectPeopleOfAllAges.h \
     ProjectPeopleOfAllAgesCommon.h \

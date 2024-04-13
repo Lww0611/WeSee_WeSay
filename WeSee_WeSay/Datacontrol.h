@@ -4,8 +4,7 @@
 #include <QDate>
 #include <QDebug>
 #include <QtSql>
-#include "Person.h"
-#include "Data.h"
+#include "ProjectPeopleOfAllAgesCommon.h"
 
 
 class DataControl
@@ -17,31 +16,42 @@ public:
     QSqlDatabase db;
     QSqlQuery query;
 
-    Data* getDetile(QString name);
+    //Data* getDetile(QString name);
 
+    //表格形式的相关接口
+    PeoPleBaseInfo* getBaseInfo(QString name);
+    LIST_Alias* getAliasList(QString name);
+    LIST_AddressList* getAddressList(QString name);
+    LIST_OfficialList* getOfficialList(QString name);
+    LIST_ListOfOfficals* getListOfOfficals(QString name);
+    LIST_DivisSocial* getDivisSocial(QString name);
+    LIST_FamillyRelation* getFamillyRelation(QString name);
+    LIST_SocialRelation* getSocialRelation(QString name);
+    LIST_ZhuShu* getZhuShu(QString name);
+    LIST_Provenance* getProvenance(QString name);
 
     //获取全部关系
-    Personptr getRelationship(QString name);
+    QStringList* getRelationship(QString name);
     //获取社会关系类
-    Personptr getAssociations(QString name);
+    QStringList* getAssociations(QString name);
     //获取学术关系类
-    Personptr getScholarship(QString name);
+    QStringList* getScholarship(QString name);
     //获取朋友关系类
-    Personptr getFriendship(QString name);
+    QStringList* getFriendship(QString name);
     //获取政治关系类
-    Personptr getPolitics(QString name);
+    QStringList* getPolitics(QString name);
     //获取著述关系类
-    Personptr getWritings(QString name);
+    QStringList* getWritings(QString name);
     //获取军事关系类
-    Personptr getMilitary(QString name);
+    QStringList* getMilitary(QString name);
     //获取医疗关系类
-    Personptr getMedicine(QString name);
+    QStringList* getMedicine(QString name);
     //获取宗教关系类
-    Personptr getReligion(QString name);
+    QStringList* getReligion(QString name);
     //获取家庭关系类
-    Personptr getFamily(QString name);
+    QStringList* getFamily(QString name);
     //获取财务关系类
-    Personptr getFinance(QString name);
+    QStringList* getFinance(QString name);
 
 
 
