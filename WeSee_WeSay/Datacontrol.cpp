@@ -66,26 +66,34 @@ PeoPleBaseInfo *DataControl::getBaseInfo(QString name)
 
     info->DieAtTheAge = c_death_age;
 
-    //籍贯、郡望找不到
-    info->NativePlace = "";
-    info->Krorimaki = "";
-
     return info;
+}
+
+PeoPleBaseInfo *DataControl::getBaseInfo(qint64 personid)
+{
+    query.exec(QString("SELECT c_name_chn FROM BIOG_MAIN WHERE c_personid = %1").arg(personid));
+    query.next();
+    return getBaseInfo(query.value(0).toString());
 }
 
 QList<AliasList> *DataControl::getAliasList(QString name)
 {
-    QList<AliasList>* aliaslist = new QList<AliasList>;
     query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
     query.next();
-    int personid = query.value(0).toInt();
+    qint64 personid = query.value(0).toInt();
+    return getAliasList(personid);
+}
+
+QList<AliasList> *DataControl::getAliasList(qint64 personid)
+{
+    QList<AliasList>* aliaslist = new QList<AliasList>;
     query.exec(QString("SELECT c_alt_name_chn, c_alt_name_type_code, c_notes FROM ALTNAME_DATA WHERE c_personid = %1").arg(personid));
     int i = 1;
     while(query.next())
     {
         AliasList* alias = new AliasList;
         alias->Number = i++;
-        alias->Nmae = query.value(0).toString();
+        alias->Name = query.value(0).toString();
         alias->Comment = query.value(2).toString();
         queryindex.exec(QString("SELECT c_name_type_desc_chn FROM ALTNAME_CODES WHERE c_name_type_code = %1").arg(query.value(1).toString()));
         queryindex.next();
@@ -97,10 +105,15 @@ QList<AliasList> *DataControl::getAliasList(QString name)
 
 QList<AddressList> *DataControl::getAddressList(QString name)
 {
-    QList<AddressList>* addressList = new QList<AddressList>;
     query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
     query.next();
-    int personid = query.value(0).toInt();
+    qint64 personid = query.value(0).toInt();
+    return getAddressList(personid);
+}
+
+QList<AddressList> *DataControl::getAddressList(qint64 personid)
+{
+    QList<AddressList>* addressList = new QList<AddressList>;
     query.exec(QString("SELECT c_addr_id, c_addr_type FROM BIOG_ADDR_DATA WHERE c_personid = %1").arg(personid));
     int i = 1;
     while(query.next())
@@ -122,10 +135,16 @@ QList<AddressList> *DataControl::getAddressList(QString name)
 
 QList<OfficialList> *DataControl::getOfficialList(QString name)
 {
-    QList<OfficialList>* officialList = new QList<OfficialList>;
     query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
     query.next();
-    int personid = query.value(0).toInt();
+    qint64 personid = query.value(0).toInt();
+    return getOfficialList(personid);
+}
+
+QList<OfficialList> *DataControl::getOfficialList(qint64 personid)
+{
+    QList<OfficialList>* officialList = new QList<OfficialList>;
+
     query.exec(QString("SLECT c_entry_code, c_notes, c_source FROM ENTRY_DATA WHERE c_personid = %1").arg(personid));
     int i = 1;
     while(query.next())
@@ -151,10 +170,16 @@ QList<OfficialList> *DataControl::getOfficialList(QString name)
 
 QList<ListOfOfficals> *DataControl::getListOfOfficals(QString name)
 {
-    QList<ListOfOfficals>* listOfOfficals = new QList<ListOfOfficals>;
     query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
     query.next();
-    int personid = query.value(0).toInt();
+    qint64 personid = query.value(0).toInt();
+    return getListOfOfficals(personid);
+}
+
+QList<ListOfOfficals> *DataControl::getListOfOfficals(qint64 personid)
+{
+    QList<ListOfOfficals>* listOfOfficals = new QList<ListOfOfficals>;
+
     query.exec(QString("SELECT c_posting_id FROM POSTING_DATA WHERE c_personid = %1").arg(personid));
     int i = 1;
     while(query.next())
@@ -207,10 +232,16 @@ QList<ListOfOfficals> *DataControl::getListOfOfficals(QString name)
 
 QList<DivisSocial> *DataControl::getDivisSocial(QString name)
 {
-    QList<DivisSocial>* divisSociallist = new QList<DivisSocial>;
     query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
     query.next();
-    int personid = query.value(0).toInt();
+    qint64 personid = query.value(0).toInt();
+    return getDivisSocial(personid);
+}
+
+QList<DivisSocial> *DataControl::getDivisSocial(qint64 personid)
+{
+    QList<DivisSocial>* divisSociallist = new QList<DivisSocial>;
+
     query.exec(QString("SELECT c_status_code, c_firstyear, c_fy_nh_code, c_lastyear, c_ly_nh_code, c_source, c_notes FROM STATUS_DATA WHERE c_personid = %1").arg(personid));
     int i = 1;
     while(query.next())
@@ -240,10 +271,16 @@ QList<DivisSocial> *DataControl::getDivisSocial(QString name)
 
 QList<FamillyRelation> *DataControl::getFamillyRelation(QString name)
 {
-    QList<FamillyRelation>* famillyRelationlist = new QList<FamillyRelation>;
     query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
     query.next();
-    int personid = query.value(0).toInt();
+    qint64 personid = query.value(0).toInt();
+    return getFamillyRelation(personid);
+}
+
+QList<FamillyRelation> *DataControl::getFamillyRelation(qint64 personid)
+{
+    QList<FamillyRelation>* famillyRelationlist = new QList<FamillyRelation>;
+
     query.exec(QString("SELECT c_kin_id, c_kin_code, c_source, c_notes FROM KIN_DATA WHERE c_personid = %1").arg(personid));
     int i = 1;
     while(query.next())
@@ -273,17 +310,75 @@ QList<SocialRelation> *DataControl::getSocialRelation(QString name)
 
 }
 
-QList<ZhuShu> *DataControl::getZhuShu(QString name)
+QList<SocialRelation> *DataControl::getSocialRelation(qint64 personid)
 {
 
+}
+
+QList<ZhuShu> *DataControl::getZhuShu(QString name)
+{
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getZhuShu(personid);
+}
+
+QList<ZhuShu> *DataControl::getZhuShu(qint64 personid)
+{
+    QList<ZhuShu>* zhuShulist = new QList<ZhuShu>;
+
+    query.exec(QString("SELECT c_textid, c_role_id, c_notes FROM BIOG_TEXT_DATA WHERE c_personid = %1").arg(personid));
+    int i = 1;
+    while(query.next())
+    {
+        ZhuShu* zhuShu = new ZhuShu;
+        zhuShu->Number = i++;
+        zhuShu->Comment = query.value(2).toString();
+        queryindex.exec(QString("SELECT c_title_chn, c_text_year FROM TEXT_CODES WHERE c_textid = %1").arg(query.value(0).toString()));
+        queryindex.next();
+        zhuShu->Production = queryindex.value(0).toString();
+        zhuShu->ProductionTime = queryindex.value(1).toString();
+        queryindex.exec(QString("SELECT c_role_desc_chn FROM TEXT_ROLE_CODES WHERE c_role_id = %1").arg(query.value(1).toString()));
+        queryindex.next();
+        zhuShu->Role = queryindex.value(0).toString();
+        zhuShulist->push_back(*zhuShu);
+    }
+    return zhuShulist;
 }
 
 QList<Provenance> *DataControl::getProvenance(QString name)
 {
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getProvenance(personid);
+}
 
+QList<Provenance> *DataControl::getProvenance(qint64 personid)
+{
+    QList<Provenance>* provenancelist = new QList<Provenance>;
+
+    query.exec(QString("SELECT c_textid, c_notes FROM BIOG_SOURCE_DATA WHERE c_personid = %1").arg(personid));
+    int i = 1;
+    while(query.next())
+    {
+        Provenance* provenance = new Provenance;
+        provenance->Number = i++;
+        provenance->Comment = query.value(1).toString();
+        queryindex.exec(QString("SELECT c_title_chn FROM TEXT_CODES WHERE c_textid = %1").arg(query.value(0).toString()));
+        queryindex.next();
+        provenance->Provenance_ = queryindex.value(0).toString();
+        provenancelist->push_back(*provenance);
+    }
+    return provenancelist;
 }
 
 QStringList *DataControl::getRelationship(QString name)
+{
+
+}
+
+QStringList *DataControl::getRelationship(qint64 personid)
 {
 
 }
@@ -293,7 +388,17 @@ QStringList *DataControl::getAssociations(QString name)
 
 }
 
+QStringList *DataControl::getAssociations(qint64 personid)
+{
+
+}
+
 QStringList *DataControl::getScholarship(QString name)
+{
+
+}
+
+QStringList *DataControl::getScholarship(qint64 personid)
 {
 
 }
@@ -303,7 +408,17 @@ QStringList *DataControl::getFriendship(QString name)
 
 }
 
+QStringList *DataControl::getFriendship(qint64 personid)
+{
+
+}
+
 QStringList *DataControl::getPolitics(QString name)
+{
+
+}
+
+QStringList *DataControl::getPolitics(qint64 personid)
 {
 
 }
@@ -313,7 +428,17 @@ QStringList *DataControl::getWritings(QString name)
 
 }
 
+QStringList *DataControl::getWritings(qint64 personid)
+{
+
+}
+
 QStringList *DataControl::getMilitary(QString name)
+{
+
+}
+
+QStringList *DataControl::getMilitary(qint64 personid)
 {
 
 }
@@ -323,7 +448,17 @@ QStringList *DataControl::getMedicine(QString name)
 
 }
 
+QStringList *DataControl::getMedicine(qint64 personid)
+{
+
+}
+
 QStringList *DataControl::getReligion(QString name)
+{
+
+}
+
+QStringList *DataControl::getReligion(qint64 personid)
 {
 
 }
@@ -333,7 +468,17 @@ QStringList *DataControl::getFamily(QString name)
 
 }
 
+QStringList *DataControl::getFamily(qint64 personid)
+{
+
+}
+
 QStringList *DataControl::getFinance(QString name)
+{
+
+}
+
+QStringList *DataControl::getFinance(qint64 personid)
 {
 
 }
