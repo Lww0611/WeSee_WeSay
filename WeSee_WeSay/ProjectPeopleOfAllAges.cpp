@@ -477,4 +477,5 @@ void ProjectPeopleOfAllAges::SignalButtonClick()
 {
     QPushButton* button = qobject_cast<QPushButton*>(QObject::sender());
     QString name = button->text();
+    qDebug()<<"Change to "<<name;
 }

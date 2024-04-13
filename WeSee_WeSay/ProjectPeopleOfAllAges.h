@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QWidget>
+#include <QDebug>
 #include "ui_ProjectPeopleOfAllAges.h"
 #include "ProjectPeopleOfAllAgesCommon.h"
 #define MAXLABLECOUNT 6

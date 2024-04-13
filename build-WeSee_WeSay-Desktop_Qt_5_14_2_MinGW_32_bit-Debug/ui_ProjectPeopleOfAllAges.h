@@ -905,7 +905,7 @@ public:
 
         retranslateUi(ProjectPeopleOfAllAgesClass);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(ProjectPeopleOfAllAgesClass);
