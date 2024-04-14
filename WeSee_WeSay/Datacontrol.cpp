@@ -11,6 +11,9 @@ DataControl::DataControl()
         qDebug() << "Error: Failed to open database:" << db.lastError().text();
         exit(1);
     }
+
+    query = QSqlQuery(db);
+    queryindex = QSqlQuery(db);
 }
 
 DataControl::~DataControl()
