@@ -86,7 +86,8 @@ public:
     QStringList* getFinance(QString name);
     QStringList* getFinance(qint64 personid);
 
-
+private:
+    QStringList* getrelationshipwithrole(qint64 personid, QString role);
 
 };
 

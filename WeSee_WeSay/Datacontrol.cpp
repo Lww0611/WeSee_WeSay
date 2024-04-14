@@ -307,12 +307,38 @@ QList<FamillyRelation> *DataControl::getFamillyRelation(qint64 personid)
 
 QList<SocialRelation> *DataControl::getSocialRelation(QString name)
 {
-
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getSocialRelation(personid);
 }
 
 QList<SocialRelation> *DataControl::getSocialRelation(qint64 personid)
 {
+    QList<SocialRelation>* SocialRelationlist = new QList<SocialRelation>;
 
+    query.exec(QString("SELECT c_assoc_code, c_assoc_id, c_source, c_notes FROM ASSOC_DATA WHERE c_personid = %1").arg(personid));
+    int i = 1;
+    while(query.next())
+    {
+        SocialRelation* socialRelation = new SocialRelation;
+        socialRelation->Number = i++;
+        socialRelation->Comment = query.value(3).toString();
+        queryindex.exec(QString("SELECT c_assoc_type_id FROM ASSOC_CODE_TYPE_REL WHERE c_assoc_code = %1").arg(query.value(1).toString()));
+        queryindex.next();
+        QString c_assoc_type_id = queryindex.value(0).toString();
+        queryindex.exec(QString("SELECT c_assoc_type_desc_chn FROM ASSOC_TYPES WHERE c_assoc_type_id = '%1'").arg(c_assoc_type_id));
+        queryindex.next();
+        socialRelation->Relation = queryindex.value(0).toString();
+        queryindex.exec(QString("SELECT c_name_chn FROM BIOG_MAIN WHERE c_personid = %1").arg(query.value(1).toString()));
+        queryindex.next();
+        socialRelation->RelationPerson = queryindex.value(0).toString();
+        queryindex.exec(QString("SELECT c_title_chn FROM TEXT_CODES WHERE c_textid = %1").arg(query.value(2).toString()));
+        queryindex.next();
+        socialRelation->Address = queryindex.value(0).toString();
+        SocialRelationlist->push_back(*socialRelation);
+    }
+    return SocialRelationlist;
 }
 
 QList<ZhuShu> *DataControl::getZhuShu(QString name)
@@ -375,112 +401,202 @@ QList<Provenance> *DataControl::getProvenance(qint64 personid)
 
 QStringList *DataControl::getRelationship(QString name)
 {
-
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getRelationship(personid);
 }
 
 QStringList *DataControl::getRelationship(qint64 personid)
 {
-
+    QStringList* stringList = new QStringList;
+    query.exec(QString("SELECT c_assoc_id FROM ASSOC_DATA WHERE c_personid = %1").arg(personid));
+    while(query.next())
+    {
+        QString* info = new QString;
+        queryindex.exec(QString("SELECT c_name_chn FROM BIOG_MAIN WHERE c_personid = %1").arg(query.value(0).toString()));
+        queryindex.next();
+        *info = queryindex.value(0).toString();
+        stringList->push_back(*info);
+    }
+    return stringList;
 }
 
 QStringList *DataControl::getAssociations(QString name)
 {
-
+    QString role = "社會關係（籠統）";
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getAssociations(qint64 personid)
 {
-
+    QString role = "社會關係（籠統）";
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getScholarship(QString name)
 {
-
+    QString role = "學術關係類";
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getScholarship(qint64 personid)
 {
-
+    QString role = "學術關係類";
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getFriendship(QString name)
 {
-
+    QString role = "朋友關係類";
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getFriendship(qint64 personid)
 {
-
+    QString role = "朋友關係類";
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getPolitics(QString name)
 {
-
+    QString role = "政治關係類";
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getPolitics(qint64 personid)
 {
-
+    QString role = "政治關係類";
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getWritings(QString name)
 {
-
+    QString role = "著述關係類";
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getWritings(qint64 personid)
 {
-
+    QString role = "著述關係類";
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getMilitary(QString name)
 {
-
+    QString role = "軍事關係類";
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getMilitary(qint64 personid)
 {
-
+    QString role = "軍事關係類";
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getMedicine(QString name)
 {
-
+    QString role = "醫療關係類";
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getMedicine(qint64 personid)
 {
-
+    QString role = "醫療關係類";
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getReligion(QString name)
 {
-
+    QString role = "宗教關係類";
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getReligion(qint64 personid)
 {
-
+    QString role = "宗教關係類";
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getFamily(QString name)
 {
-
+    QString role = "家庭關係類";
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getFamily(qint64 personid)
 {
-
+    QString role = "家庭關係類";
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getFinance(QString name)
 {
-
+    QString role = "財務關係類";
+    query.exec(QString("SELECT c_personid FROM BIOG_MAIN WHERE c_name_chn = '%1'").arg(name));
+    query.next();
+    qint64 personid = query.value(0).toInt();
+    return getrelationshipwithrole(personid, role);
 }
 
 QStringList *DataControl::getFinance(qint64 personid)
 {
+    QString role = "財務關係類";
+    return getrelationshipwithrole(personid, role);
+}
 
+QStringList *DataControl::getrelationshipwithrole(qint64 personid, QString role)
+{
+    QStringList* stringList = new QStringList;
+    query.exec(QString("SELECT c_assoc_id, c_assoc_code FROM ASSOC_DATA WHERE c_personid = %1").arg(personid));
+    while(query.next())
+    {
+
+        queryindex.exec(QString("SELECT c_assoc_type_id FROM ASSOC_CODE_TYPE_REL WHERE c_assoc_code = %1").arg(query.value(1).toString()));
+        queryindex.next();
+        QString c_assoc_type_id = queryindex.value(0).toString();
+        queryindex.exec(QString("SELECT c_assoc_type_parent_id FROM ASSOC_TYPES WHERE c_assoc_type_id = '%1'").arg(c_assoc_type_id));
+        queryindex.next();
+        QString c_assoc_type_parent_id = queryindex.value(0).toString();;
+        queryindex.exec(QString("SELECT c_assoc_type_desc_chn FROM ASSOC_TYPES WHERE c_assoc_type_id = '%1'").arg(c_assoc_type_parent_id));
+        queryindex.next();
+        if(queryindex.value(0).toString() == role)
+        {
+            queryindex.exec(QString("SELECT c_name_chn FROM BIOG_MAIN WHERE c_personid = %1").arg(query.value(0).toString()));
+            queryindex.next();
+            QString* info = new QString;
+            *info = queryindex.value(0).toString();
+            stringList->push_back(*info);
+        }
+    }
+    return stringList;
 }
 
 
