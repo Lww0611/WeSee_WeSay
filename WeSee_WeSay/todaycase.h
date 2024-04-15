@@ -28,7 +28,7 @@ public:
 
 private:
     void loadEvents(const QDate &date);
-    void TodayCase::addToTimeline(const QString &year, const QString &event, const QString &eventTime, const QString &month, const QString &day, const QString &img, const QString &href, const QString &content) ;
+    void addToTimeline(const QString &year, const QString &event, const QString &eventTime, const QString &month, const QString &day, const QString &img, const QString &href, const QString &content);
     QLabel *label;
     QGridLayout *layout;
     HistoricalEvent *timeline;
