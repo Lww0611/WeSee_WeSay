@@ -60,4 +60,3 @@ QList<HistoricalEvent> TodayCase::retrieveEvents(const QString &month, const QSt
     // 示例代码中未包含数据库查询的完整实现，您需要根据自己的数据库和查询方式进行实现
     return events;
 }
-
