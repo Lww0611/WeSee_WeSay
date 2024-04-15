@@ -7,36 +7,43 @@ ProjectPeopleOfAllAges::ProjectPeopleOfAllAges(QWidget *parent)
     initConnect();
     ui.stackedWidget->setCurrentIndex(0);
     this->setWindowTitle(QStringLiteral("历代人物"));
+    data=new DataControl;
 
     //测试
-    PeoPleBaseInfo info;
-    info.Name = QStringLiteral("李白");
-    info.PersonID = QStringLiteral("32540");
-    info.Alias = QStringLiteral("李拾遗，李翰林，李谪仙，李青莲 太白 酒仙翁，青莲居士 李十二");
-    info.Birth = QStringLiteral("周 长安 元年(701)");
-    info.DeathDays = QStringLiteral("唐 宝应 元年(762)");
-//    info.NativePlace = QStringLiteral("任城");
-    info.DieAtTheAge= QStringLiteral("701");
-//    info.Krorimaki = QStringLiteral("陇西");
-    setBaseInfo(info);
+//    PeoPleBaseInfo info;
+//    info.Name = QStringLiteral("李白");
+//    info.PersonID = QStringLiteral("32540");
+//    info.Alias = QStringLiteral("李拾遗，李翰林，李谪仙，李青莲 太白 酒仙翁，青莲居士 李十二");
+//    info.Birth = QStringLiteral("周 长安 元年(701)");
+//    info.DeathDays = QStringLiteral("唐 宝应 元年(762)");
+////    info.NativePlace = QStringLiteral("任城");
+//    info.DieAtTheAge= QStringLiteral("701");
+////    info.Krorimaki = QStringLiteral("陇西");
+//    setBaseInfo(info);
 
-    LIST_Alias infoList;
-    AliasList alias, alias1, alias2;
-    alias.Name = "1";
-    alias1.Name = "22";
-    alias2.Name = "333";
-    infoList.push_back(alias);
-    infoList.push_back(alias1);
-    infoList.push_back(alias2);
-    setAliasList(infoList);
+//    LIST_Alias infoList;
+//    AliasList alias, alias1, alias2;
+//    alias.Name = "1";
+//    alias1.Name = "22";
+//    alias2.Name = "333";
+//    infoList.push_back(alias);
+//    infoList.push_back(alias1);
+//    infoList.push_back(alias2);
+//    setAliasList(infoList);
 
-    QStringList list1;
-    list1 << QStringLiteral("李商隐") << QStringLiteral("白居易") << QStringLiteral("李商隐") << QStringLiteral("李商隐") << QStringLiteral("李商隐") << QStringLiteral("李商隐") << QStringLiteral("李商隐") << QStringLiteral("李商隐") << QStringLiteral("李商隐") << QStringLiteral("李商隐");
-    setKindship(list1);
+//    QStringList list1;
+//    list1 << QStringLiteral("李商隐") << QStringLiteral("白居易") << QStringLiteral("李商隐") << QStringLiteral("李商隐") << QStringLiteral("李商隐") << QStringLiteral("李商隐") << QStringLiteral("李商隐") << QStringLiteral("李商隐") << QStringLiteral("李商隐") << QStringLiteral("李商隐");
+//    setKindship(list1);
 }
 
 ProjectPeopleOfAllAges::~ProjectPeopleOfAllAges()
 {}
+
+void ProjectPeopleOfAllAges::showPersonInfo(QString name)
+{
+    setBaseInfo(*(data->getBaseInfo(name)));
+}
+
 void ProjectPeopleOfAllAges::initConnect()
 {
     connect(ui.pushButton_form, SIGNAL(clicked()), this, SLOT(SignalPushButton_form()));

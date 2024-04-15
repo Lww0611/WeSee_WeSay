@@ -4,6 +4,7 @@
 #include <QDebug>
 #include "ui_ProjectPeopleOfAllAges.h"
 #include "ProjectPeopleOfAllAgesCommon.h"
+#include "Datacontrol.h"
 #define MAXLABLECOUNT 6
 class QTableWidget;
 class ProjectPeopleOfAllAges : public QWidget
@@ -13,7 +14,19 @@ class ProjectPeopleOfAllAges : public QWidget
 public:
     ProjectPeopleOfAllAges(QWidget *parent = nullptr);
     ~ProjectPeopleOfAllAges();
-public:
+
+    // 展示人物全部信息
+    void showPersonInfo(QString name);
+private slots:
+    void SignalPushButton_form();
+    void SignalpushButton_relation();
+    void SignalStateChanged(int);
+    void SignalButtonClick();
+private:
+    void initConnect();
+    void initUI();
+    void setTableWidgetVisbal(QTableWidget*,int index = 0);
+    void setTableWidgetVisbal(QWidget*, int index = 0);
 
     // 基本信息接口
     void setBaseInfo(const PeoPleBaseInfo& info);
@@ -47,17 +60,7 @@ public:
     void setAcademicRelation(QStringList& info);
     // 关系图形是-著述关系类接口
     void setBibliographicRelation(QStringList& info);
-
-private slots:
-    void SignalPushButton_form();
-    void SignalpushButton_relation();
-    void SignalStateChanged(int);
-    void SignalButtonClick();
-private:
-    void initConnect();
-    void initUI();
-    void setTableWidgetVisbal(QTableWidget*,int index = 0);
-    void setTableWidgetVisbal(QWidget*, int index = 0);
 private:
     Ui::ProjectPeopleOfAllAgesClass ui;
+    DataControl* data;
 };

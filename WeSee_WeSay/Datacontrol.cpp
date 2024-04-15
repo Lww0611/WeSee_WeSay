@@ -7,15 +7,15 @@ DataControl::DataControl()
     db = QSqlDatabase::addDatabase("QSQLITE");
 
     QString currentPath = QCoreApplication::applicationDirPath();
-qDebug() << currentPath;
+    qDebug() << currentPath;
     QFileInfo fileInfo;
     fileInfo.setFile(currentPath);
     QString rootPath;
     rootPath= fileInfo.absolutePath();
     fileInfo.setFile(rootPath);
     rootPath= fileInfo.absolutePath();
-qDebug() << rootPath;
-    db.setDatabaseName(rootPath + "/WeSee_WeSay/recources/latest.db");
+    qDebug() << rootPath;
+    db.setDatabaseName(rootPath + "/WeSee_WeSay/resources/latest.db");
 
     if (!db.open()) {
         qDebug() << "Error: Failed to open database:" << db.lastError().text();
