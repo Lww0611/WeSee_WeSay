@@ -29,7 +29,6 @@ void TodayCase::loadEvents(const QDate &date) {
 
 void TodayCase::addToTimeline(const QString &year, const QString &event, const QString &eventTime, const QString &month, const QString &day, const QString &img, const QString &href, const QString &content) {
     HistoricalEvent *newEvent = new HistoricalEvent;
-    newEvent->year = year;
     newEvent->event = event;
     newEvent->eventTime = eventTime;
     newEvent->month = month;
@@ -53,10 +52,31 @@ void TodayCase::addToTimeline(const QString &year, const QString &event, const Q
 
 QList<HistoricalEvent> TodayCase::retrieveEvents(const QString &month, const QString &day) {
     QList<HistoricalEvent> events;
-    // 假设数据库查询的实现在这里
-    // 这里只是一个示例，实际实现会根据您的数据库结构来编写查询语句
-    QString query = QString("SELECT * FROM events WHERE month = '%1' AND day = '%2'").arg(month, day);
-    // 执行查询并将结果存入 events 列表
-    // 示例代码中未包含数据库查询的完整实现，您需要根据自己的数据库和查询方式进行实现
+
+    // 这里是您从数据库中检索事件的示例代码
+    // 请用您的实际数据库查询实现替换这部分代码
+
+    // 假设您已经设置好了一个名为 "db" 的 QSqlDatabase
+    QSqlQuery query;
+    query.prepare("SELECT * FROM events WHERE month = :month AND day = :day");
+    query.bindValue(":month", month);
+    query.bindValue(":day", day);
+    if (query.exec()) {
+        while (query.next()) {
+            HistoricalEvent event;
+            event.year = query.value("year").toString();
+            event.event = query.value("event").toString();
+            event.eventTime = query.value("eventTime").toString();
+            event.month = query.value("month").toString();
+            event.day = query.value("day").toString();
+            event.img = query.value("img").toString();
+            event.href = query.value("href").toString();
+            event.content = query.value("content").toString();
+            events.append(event);
+        }
+    } else {
+        qDebug() << "Error executing query:" << query.lastError().text();
+    }
+
     return events;
 }
